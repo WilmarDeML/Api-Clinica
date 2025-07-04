@@ -4,6 +4,9 @@ import com.wilmardeml.apimed.modelos.dtos.*;
 import com.wilmardeml.apimed.modelos.entidades.Paciente;
 import com.wilmardeml.apimed.repositorios.PacienteRepository;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,13 @@ public class PacienteController {
 
     public PacienteController(PacienteRepository repository) {
         this.repository = repository;
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<DatosPaciente>> listar(@PageableDefault(size = 10, sort = "nombre") Pageable paginacion) {
+        var page = repository.findAll(paginacion).map(DatosPaciente::new);
+
+        return ResponseEntity.ok(page);
     }
 
     @Transactional
