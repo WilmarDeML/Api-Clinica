@@ -30,6 +30,13 @@ public class PacienteController {
         return ResponseEntity.ok(page);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<DatosDetallePaciente> buscar(@PathVariable Long id) {
+        var pacienteBuscado = repository.getReferenceById(id);
+
+        return ResponseEntity.ok(new DatosDetallePaciente(pacienteBuscado));
+    }
+
     @Transactional
     @PostMapping
     public ResponseEntity<DatosDetallePaciente> registrar(@RequestBody @Valid DatosRegistroPaciente datosPaciente) {
