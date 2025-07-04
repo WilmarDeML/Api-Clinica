@@ -19,6 +19,7 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Boolean activo;
     private String nombre;
     private String correo;
     private String telefono;
@@ -28,6 +29,7 @@ public class Paciente {
     private Direccion direccion;
 
     public Paciente(DatosRegistroPaciente paciente) {
+        activo = Boolean.TRUE;
         nombre = paciente.getNombre();
         correo = paciente.getCorreo();
         telefono = paciente.getTelefono();
@@ -39,6 +41,10 @@ public class Paciente {
         if (paciente.direccion() != null) direccion.actualizarInfo(paciente.direccion());
         if (paciente.nombre() != null) nombre = paciente.nombre();
         if (paciente.telefono() != null) telefono = paciente.telefono();
+    }
+
+    public void desactivar() {
+        activo = Boolean.FALSE;
     }
 
 }
