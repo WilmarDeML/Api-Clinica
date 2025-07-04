@@ -51,4 +51,13 @@ public class PacienteController {
 
         return ResponseEntity.created(location).body(new DatosDetallePaciente(paciente));
     }
+
+    @Transactional
+    @PutMapping
+    public ResponseEntity<DatosDetallePaciente> actualizar(@RequestBody @Valid DatosActualizaPaciente paciente) {
+        var pacienteBuscado = repository.getReferenceById(paciente.id());
+        pacienteBuscado.actualizarInfo(paciente);
+
+        return ResponseEntity.ok(new DatosDetallePaciente(pacienteBuscado));
+    }
 }

@@ -1,5 +1,6 @@
 package com.wilmardeml.apimed.modelos.entidades;
 
+import com.wilmardeml.apimed.modelos.dtos.DatosActualizaPaciente;
 import com.wilmardeml.apimed.modelos.dtos.DatosRegistroPaciente;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -32,6 +33,12 @@ public class Paciente {
         telefono = paciente.getTelefono();
         documento = paciente.getDocumento();
         direccion = new Direccion(paciente.getDireccion());
+    }
+
+    public void actualizarInfo(DatosActualizaPaciente paciente) {
+        if (paciente.direccion() != null) direccion.actualizarInfo(paciente.direccion());
+        if (paciente.nombre() != null) nombre = paciente.nombre();
+        if (paciente.telefono() != null) telefono = paciente.telefono();
     }
 
 }
