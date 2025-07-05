@@ -40,8 +40,8 @@ public class ConsultaController {
 
     @DeleteMapping
     @Transactional
-    public ResponseEntity cancelar(@RequestBody @Valid DatosCancelacionConsulta datos) {
-        consultasService.cancelar(datos);
+    public ResponseEntity<?> cancelar(@RequestBody @Valid DatosCancelacionConsulta datosCancelacion) {
+        consultasService.cancelar(datosCancelacion);
         return ResponseEntity.noContent().build();
     }
 

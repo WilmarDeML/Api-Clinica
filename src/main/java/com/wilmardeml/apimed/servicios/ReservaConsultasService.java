@@ -11,6 +11,8 @@ import com.wilmardeml.apimed.repositorios.PacienteRepository;
 import com.wilmardeml.apimed.servicios.validaciones.ValidadorDeConsultas;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -59,10 +61,15 @@ public class ReservaConsultasService {
     }
 
     public void cancelar(DatosCancelacionConsulta datos) {
-        if (!repository.existsById(datos.idConsulta())) {
+
+        if (!repository.existsById(datos.idConsulta()))
             throw new ValidacionException("Id de la consulta informado no existe!");
-        }
+
         var consulta = repository.getReferenceById(datos.idConsulta());
+
+        if (Duration.between(LocalDateTime.now(), consulta.getFecha()).toHours() < 24)
+            throw new ValidacionException("Sólo se puede cancelar con 24 horas de anticipación!");
+
         consulta.cancelar(datos.motivo());
     }
 }
