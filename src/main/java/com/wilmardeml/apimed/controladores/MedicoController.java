@@ -6,6 +6,7 @@ import com.wilmardeml.apimed.modelos.dtos.DatosMedico;
 import com.wilmardeml.apimed.modelos.dtos.DatosRegistroMedico;
 import com.wilmardeml.apimed.modelos.entidades.Medico;
 import com.wilmardeml.apimed.repositorios.MedicoRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("medicos")
+@SecurityRequirement(name = "bearer-key")
 public class MedicoController {
     private final MedicoRepository repository;
 

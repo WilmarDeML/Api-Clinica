@@ -3,6 +3,7 @@ package com.wilmardeml.apimed.controladores;
 import com.wilmardeml.apimed.modelos.dtos.*;
 import com.wilmardeml.apimed.modelos.entidades.Paciente;
 import com.wilmardeml.apimed.repositorios.PacienteRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("pacientes")
+@SecurityRequirement(name = "bearer-key")
 public class PacienteController {
     private final PacienteRepository repository;
 

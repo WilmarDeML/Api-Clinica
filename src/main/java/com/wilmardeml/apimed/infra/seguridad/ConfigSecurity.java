@@ -30,10 +30,11 @@ public class ConfigSecurity {
                 .addFilterBefore(filterSecurity, UsernamePasswordAuthenticationFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(req -> {
-                    req.requestMatchers(HttpMethod.POST, "login").permitAll();
-                    req.anyRequest().authenticated();
-                });
+                .authorizeHttpRequests(req ->
+                    req.requestMatchers(HttpMethod.POST, "login").permitAll()
+                            .requestMatchers("v3/api-docs/**", "swagger-ui.html", "swagger-ui/**").permitAll()
+                            .anyRequest().authenticated()
+                );
 
         return http.build();
     }
