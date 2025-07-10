@@ -4,15 +4,13 @@ import com.wilmardeml.apimed.modelos.dtos.DatosActualizaMedico;
 import com.wilmardeml.apimed.modelos.dtos.DatosRegistroMedico;
 import com.wilmardeml.apimed.modelos.enums.Especialidad;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "medicos")
 public class Medico {

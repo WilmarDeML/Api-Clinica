@@ -2,6 +2,7 @@ package com.wilmardeml.apimed.servicios;
 
 import com.wilmardeml.apimed.infra.excepciones.ValidacionException;
 import com.wilmardeml.apimed.modelos.dtos.DatosCancelacionConsulta;
+import com.wilmardeml.apimed.modelos.dtos.DatosDetalleConsulta;
 import com.wilmardeml.apimed.modelos.dtos.DatosReservaConsulta;
 import com.wilmardeml.apimed.modelos.entidades.Consulta;
 import com.wilmardeml.apimed.modelos.entidades.Medico;
@@ -30,7 +31,7 @@ public class ReservaConsultasService {
         this.validadores = validadores;
     }
 
-    public Consulta reservar(DatosReservaConsulta datosReserva) {
+    public DatosDetalleConsulta reservar(DatosReservaConsulta datosReserva) {
 
         if (!pacienteRepository.existsById(datosReserva.idPaciente()))
             throw new ValidacionException("No existe un paciente con el id informado");
@@ -47,7 +48,7 @@ public class ReservaConsultasService {
 
         var paciente = pacienteRepository.getReferenceById(datosReserva.idPaciente());
         var consulta = new Consulta(null, medico, paciente, datosReserva.fecha(), null);
-        return repository.save(consulta);
+        return new DatosDetalleConsulta(repository.save(consulta));
     }
 
     private Medico elegirMedico(DatosReservaConsulta datosReserva) {

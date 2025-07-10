@@ -29,15 +29,15 @@ public class ConsultaController {
     @PostMapping
     public ResponseEntity<DatosDetalleConsulta> registrar(@RequestBody @Valid DatosReservaConsulta datosReserva) {
 
-        Consulta consulta = consultasService.reservar(datosReserva);
+        DatosDetalleConsulta consulta = consultasService.reservar(datosReserva);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(consulta.getId())
+                .buildAndExpand(consulta.id())
                 .toUri();
 
-        return ResponseEntity.created(location).body(new DatosDetalleConsulta(consulta));
+        return ResponseEntity.created(location).body(consulta);
     }
 
     @DeleteMapping
