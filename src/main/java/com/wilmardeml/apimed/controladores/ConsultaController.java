@@ -3,7 +3,6 @@ package com.wilmardeml.apimed.controladores;
 import com.wilmardeml.apimed.modelos.dtos.DatosCancelacionConsulta;
 import com.wilmardeml.apimed.modelos.dtos.DatosDetalleConsulta;
 import com.wilmardeml.apimed.modelos.dtos.DatosReservaConsulta;
-import com.wilmardeml.apimed.modelos.entidades.Consulta;
 import com.wilmardeml.apimed.servicios.ReservaConsultasService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
